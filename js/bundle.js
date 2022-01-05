@@ -11,7 +11,7 @@
 
 //moment.js is used to send compatible date and time information to the Tomorrow.IO API.
 const moment = require('moment');
-//node-fetch is used to comunicate with the Tomorrow.IO API.
+//node-fetch is used to comunicate with the APIs, as well as retrieving the keys from key.json
 const fetch = require('node-fetch');
 //query-string is used to organize the information needed to send to Tomorrow.IO API, including the key, location
 //information, and others that can be found below.
@@ -49,7 +49,7 @@ const fields = [
 const units = "imperial";
 
 //These are the default timesteps for the weather.
-const timesteps = ["5m", "1h", "1d"];
+const timesteps = ["1m", "1h", "1d"];
 
 //This function takes in the weatherData gathered from Tomorrow.IO and pastes the information
 //on the forms found on the webpage.
@@ -103,10 +103,30 @@ function weatherCall(location)
     //Call the moment.utc() function to get the valid time frames for the forecast.
     const now = moment.utc();
     const startTime = moment.utc(now).add(0, "minutes").toISOString();
-    const endTime = moment.utc(now).add(2, "days").toISOString();
-    
-    // Use this as the timezone for the times given.
-    const timezone = "America/Chicago";
+    const endTime = moment.utc(now).add(2, "days").toISOString(); 
+
+    //The timezone of the city entered by the user.
+    var timezone;
+    var timezoneKey;
+
+    //Get the current timestamp in seconds.
+    var timestamp = (Date.now())/1000;
+
+    //Use node-fetch to retrieve the key for the Google APIs
+    fetch("../key.json")
+    .then(response => response.json())
+    .then(json => keys = json)
+    .then(keys => {
+        timezoneKey = keys.googleMapsKey
+        let timezoneURL =  "https://maps.googleapis.com/maps/api/timezone/json?location=" + location +"&timestamp="+timestamp+"&key=" + timezoneKey;
+
+        //Call the Google Timezone API to retrieve the timezone for the given city.
+        fetch(timezoneURL)
+        .then(response => response.json())
+        .then(json => {
+            timezone = json.timeZoneId;
+            console.log(timezone)})
+    })
     
     // Gather all the information necessary to send to Tomorrow.IO and turn it into a string.
     const getTimelineParameters =  queryString.stringify({
@@ -172,11 +192,13 @@ function acceptInput()
         alert("Invalid Input!");
 }
 
+//This function loads the Google Maps JavaScript API into the index.html file by retrieve the key from key.json
+//and creating a script element at the end of the html.
 function loadMapsAPI()
 {
-    var keys;
     var mapsKey;
 
+    //Use node-fetch to get the key for the Google Maps API.
     fetch("../key.json")
     .then(response => response.json())
     .then(json => keys = json)
@@ -184,14 +206,17 @@ function loadMapsAPI()
         mapsKey = keys.googleMapsKey
         let mapsURL =  "https://maps.googleapis.com/maps/api/js?key=" + mapsKey;
 
+        //Create the new script element, add in the URL and then append it to body of the document.
         let mapsScript = document.createElement("script");
         mapsScript.setAttribute("src", mapsURL);
     
         document.body.appendChild(mapsScript);
     
-        mapsScript.addEventListener("load", () => {console.log("File loaded");})})
+        mapsScript.addEventListener("load", () => {console.log("File loaded");})
+    })
 }
 
+//Load in the Maps API at the start of execution.
 loadMapsAPI();
 
 //Call the acceptInput() function whenever the user clicks the submit button on the form.
