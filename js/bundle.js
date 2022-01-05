@@ -21,7 +21,7 @@ const queryString = require('query-string');
 const getTimelineURL = "https://api.tomorrow.io/v4/timelines";
 
 //This is the key used to access the Tomorrow.IO API.
-const apikey = "HdkFJFPPTYSFG4Jt0JTbbppWDaXlhVGz";
+const apikey = "";
 
 // These are the fields retrieved from the Tomorrow.IO API and that will be displayed to the user.
 const fields = [
