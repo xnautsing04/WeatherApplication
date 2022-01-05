@@ -169,6 +169,31 @@ function acceptInput()
         alert("Invalid Input!");
 }
 
+function loadMapsAPI()
+{
+    var keys;
+    var mapsKey;
+
+    fetch("../key.json")
+    .then(response => response.json())
+    .then(json => keys = json)
+    .then(keys => {
+        mapsKey = keys.googleMapsKey
+        let mapsURL =  "https://maps.googleapis.com/maps/api/js?key=" + mapsKey;
+
+        let mapsScript = document.createElement("script");
+        mapsScript.setAttribute("src", mapsURL);
+    
+        document.body.appendChild(mapsScript);
+    
+        mapsScript.addEventListener("load", () => {console.log("File loaded");})})
+}
+
+loadMapsAPI();
+
+//Call the acceptInput() function whenever the user clicks the submit button on the form.
+let form = document.getElementById("weatherInfo");
+
 form.addEventListener("submit", function(event){
         acceptInput();
 });
