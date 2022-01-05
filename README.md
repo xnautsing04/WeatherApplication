@@ -6,7 +6,9 @@ index.html in the Pages folder is the webpage that is accessed by the user. Inpu
 applying the browserify package to InputProcess.js. bundle.js is the script that is loaded into index.html. More information on the specifics of the JavaScript implementation can
 be found in the documentation of those two .js files.
 
-This is a work-in-progress. Listed below are some of the planned improvements and additions:
+Currently, the keys for both the Google Maps JavaScript API and Tomorrow.IO API must be added in manually to the source code. This is an inconvience but will be fixed in a future update.
+
+The webpage currently functions, but this is a work-in-progress. Listed below are some of the planned improvements and additions:
 
 - Implement a solution for needing the keys for the API calls.
 - Dynamically change the timezone based on the city given by the user.
