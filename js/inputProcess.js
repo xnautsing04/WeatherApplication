@@ -17,8 +17,15 @@ const queryString = require('query-string');
 // This is the URL to access the Tomorrow.IO API.
 const getTimelineURL = "https://api.tomorrow.io/v4/timelines";
 
-//This is the key used to access the Tomorrow.IO API.
-const apikey = "";
+//Use node-fetch to gather the key for the Tomorrow.IO API. This .json file should be created locally,
+//based on the key.json.dist file.
+var keys;
+var apikey;
+
+fetch("../key.json")
+.then(response => response.json())
+.then(json => keys = json)
+.then(keys => apikey = keys.tomorrowKey)
 
 // These are the fields retrieved from the Tomorrow.IO API and that will be displayed to the user.
 const fields = [
@@ -161,9 +168,6 @@ function acceptInput()
     else
         alert("Invalid Input!");
 }
-
-//Call the acceptInput() function whenever the user clicks the submit button on the form.
-let form = document.getElementById("weatherInfo");
 
 form.addEventListener("submit", function(event){
         acceptInput();
