@@ -6,9 +6,9 @@ index.html in the Pages folder is the webpage that is accessed by the user. Inpu
 applying the browserify package to InputProcess.js. bundle.js is the script that is loaded into index.html. More information on the specifics of the JavaScript implementation can
 be found in the documentation of those two .js files.
 
-This is a work-in-progress. Listed below are only a few of the planned improvements and additions:
+This is a work-in-progress. Listed below are some of the planned improvements and additions:
 
 - Implement a solution for needing the keys for the API calls.
 - Dynamically change the timezone based on the city given by the user.
-- Overhaul the look of the webpage with CSS.
 - Allow the user the customize what information is shown and the timesteps used.
+- Overhaul the look of the webpage with CSS.
