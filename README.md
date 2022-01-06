@@ -8,7 +8,4 @@ be found in the documentation of those two .js files.
 
 Currently, the keys for both the Google Maps JavaScript API and Tomorrow.IO API must be added in to a file named keys.json in the root directory of the project. The file keys.json.dist shows an example of how this should be organized.
 
-The webpage currently functions, but this is a work-in-progress. Listed below are some of the planned improvements and additions:
-
-- Allow the user the customize what information is shown and the timesteps used.
-- Overhaul the look of the webpage with CSS.
+This webpage is not finished and refinements are still being worked on as of the last update to GitHub.
