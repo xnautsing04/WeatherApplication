@@ -63,10 +63,6 @@ function displayWeatherData(weatherData)
     document.getElementById("WD").innerHTML = "Wind Direction: " + weatherData.data.timelines[0].intervals[0].values.windDirection;
     document.getElementById("T").innerHTML = "Temperature: " + weatherData.data.timelines[0].intervals[0].values.temperature;
     document.getElementById("TA").innerHTML = "Temperature Apparent: " + weatherData.data.timelines[0].intervals[0].values.temperatureApparent;
-    document.getElementById("CC").innerHTML = "Cloud Cover: " + weatherData.data.timelines[0].intervals[0].values.cloudCover;
-    document.getElementById("CB").innerHTML = "Cloud Base: " + weatherData.data.timelines[0].intervals[0].values.cloudBase;
-    document.getElementById("CCe").innerHTML = "Cloud Ceiling: " + weatherData.data.timelines[0].intervals[0].values.cloudCeiling;
-    document.getElementById("WC").innerHTML = "Weather Code: " + weatherData.data.timelines[0].intervals[0].values.weatherCode;
 
     //The following are for 1 hour.
     document.getElementById("PIH").innerHTML = "Precipitation Intensity: " + weatherData.data.timelines[1].intervals[0].values.precipitationIntensity;
@@ -76,10 +72,6 @@ function displayWeatherData(weatherData)
     document.getElementById("WDH").innerHTML = "Wind Direction: " + weatherData.data.timelines[1].intervals[0].values.windDirection;
     document.getElementById("TH").innerHTML = "Temperature: " + weatherData.data.timelines[1].intervals[0].values.temperature;
     document.getElementById("TAH").innerHTML = "Temperature Apparent: " + weatherData.data.timelines[1].intervals[0].values.temperatureApparent;
-    document.getElementById("CCH").innerHTML = "Cloud Cover: " + weatherData.data.timelines[1].intervals[0].values.cloudCover;
-    document.getElementById("CBH").innerHTML = "Cloud Base: " + weatherData.data.timelines[1].intervals[0].values.cloudBase;
-    document.getElementById("CCeH").innerHTML = "Cloud Ceiling: " + weatherData.data.timelines[1].intervals[0].values.cloudCeiling;
-    document.getElementById("WCH").innerHTML = "Weather Code: " + weatherData.data.timelines[1].intervals[0].values.weatherCode;
 
     //The following are for 1 day.
     document.getElementById("PID").innerHTML = "Precipitation Intensity: " + weatherData.data.timelines[2].intervals[0].values.precipitationIntensity;
@@ -89,10 +81,6 @@ function displayWeatherData(weatherData)
     document.getElementById("WDD").innerHTML = "Wind Direction: " + weatherData.data.timelines[2].intervals[0].values.windDirection;
     document.getElementById("TD").innerHTML = "Temperature: " + weatherData.data.timelines[2].intervals[0].values.temperature;
     document.getElementById("TAD").innerHTML = "Temperature Apparent: " + weatherData.data.timelines[2].intervals[0].values.temperatureApparent;
-    document.getElementById("CCD").innerHTML = "Cloud Cover: " + weatherData.data.timelines[2].intervals[0].values.cloudCover;
-    document.getElementById("CBD").innerHTML = "Cloud Base: " + weatherData.data.timelines[2].intervals[0].values.cloudBase;
-    document.getElementById("CCeD").innerHTML = "Cloud Ceiling: " + weatherData.data.timelines[2].intervals[0].values.cloudCeiling;
-    document.getElementById("WCD").innerHTML = "Weather Code: " + weatherData.data.timelines[2].intervals[0].values.weatherCode;
 }
 
 //This function gathers the necessary information to call Tomorrow.IO and makes the call with node-fetch.

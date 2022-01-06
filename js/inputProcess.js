@@ -47,7 +47,7 @@ const fields = [
 const units = "imperial";
 
 //These are the default timesteps for the weather.
-const timesteps = ["5m", "1h", "1d"];
+const timesteps = ["1m", "1h", "1d"];
 
 //This function takes in the weatherData gathered from Tomorrow.IO and pastes the information
 //on the forms found on the webpage.
@@ -61,10 +61,6 @@ function displayWeatherData(weatherData)
     document.getElementById("WD").innerHTML = "Wind Direction: " + weatherData.data.timelines[0].intervals[0].values.windDirection;
     document.getElementById("T").innerHTML = "Temperature: " + weatherData.data.timelines[0].intervals[0].values.temperature;
     document.getElementById("TA").innerHTML = "Temperature Apparent: " + weatherData.data.timelines[0].intervals[0].values.temperatureApparent;
-    document.getElementById("CC").innerHTML = "Cloud Cover: " + weatherData.data.timelines[0].intervals[0].values.cloudCover;
-    document.getElementById("CB").innerHTML = "Cloud Base: " + weatherData.data.timelines[0].intervals[0].values.cloudBase;
-    document.getElementById("CCe").innerHTML = "Cloud Ceiling: " + weatherData.data.timelines[0].intervals[0].values.cloudCeiling;
-    document.getElementById("WC").innerHTML = "Weather Code: " + weatherData.data.timelines[0].intervals[0].values.weatherCode;
 
     //The following are for 1 hour.
     document.getElementById("PIH").innerHTML = "Precipitation Intensity: " + weatherData.data.timelines[1].intervals[0].values.precipitationIntensity;
@@ -74,10 +70,6 @@ function displayWeatherData(weatherData)
     document.getElementById("WDH").innerHTML = "Wind Direction: " + weatherData.data.timelines[1].intervals[0].values.windDirection;
     document.getElementById("TH").innerHTML = "Temperature: " + weatherData.data.timelines[1].intervals[0].values.temperature;
     document.getElementById("TAH").innerHTML = "Temperature Apparent: " + weatherData.data.timelines[1].intervals[0].values.temperatureApparent;
-    document.getElementById("CCH").innerHTML = "Cloud Cover: " + weatherData.data.timelines[1].intervals[0].values.cloudCover;
-    document.getElementById("CBH").innerHTML = "Cloud Base: " + weatherData.data.timelines[1].intervals[0].values.cloudBase;
-    document.getElementById("CCeH").innerHTML = "Cloud Ceiling: " + weatherData.data.timelines[1].intervals[0].values.cloudCeiling;
-    document.getElementById("WCH").innerHTML = "Weather Code: " + weatherData.data.timelines[1].intervals[0].values.weatherCode;
 
     //The following are for 1 day.
     document.getElementById("PID").innerHTML = "Precipitation Intensity: " + weatherData.data.timelines[2].intervals[0].values.precipitationIntensity;
@@ -87,10 +79,6 @@ function displayWeatherData(weatherData)
     document.getElementById("WDD").innerHTML = "Wind Direction: " + weatherData.data.timelines[2].intervals[0].values.windDirection;
     document.getElementById("TD").innerHTML = "Temperature: " + weatherData.data.timelines[2].intervals[0].values.temperature;
     document.getElementById("TAD").innerHTML = "Temperature Apparent: " + weatherData.data.timelines[2].intervals[0].values.temperatureApparent;
-    document.getElementById("CCD").innerHTML = "Cloud Cover: " + weatherData.data.timelines[2].intervals[0].values.cloudCover;
-    document.getElementById("CBD").innerHTML = "Cloud Base: " + weatherData.data.timelines[2].intervals[0].values.cloudBase;
-    document.getElementById("CCeD").innerHTML = "Cloud Ceiling: " + weatherData.data.timelines[2].intervals[0].values.cloudCeiling;
-    document.getElementById("WCD").innerHTML = "Weather Code: " + weatherData.data.timelines[2].intervals[0].values.weatherCode;
 }
 
 //This function gathers the necessary information to call Tomorrow.IO and makes the call with node-fetch.
@@ -101,10 +89,30 @@ function weatherCall(location)
     //Call the moment.utc() function to get the valid time frames for the forecast.
     const now = moment.utc();
     const startTime = moment.utc(now).add(0, "minutes").toISOString();
-    const endTime = moment.utc(now).add(2, "days").toISOString();
-    
-    // Use this as the timezone for the times given.
-    const timezone = "America/Chicago";
+    const endTime = moment.utc(now).add(2, "days").toISOString(); 
+
+    //The timezone of the city entered by the user.
+    var timezone;
+    var timezoneKey;
+
+    //Get the current timestamp in seconds.
+    var timestamp = (Date.now())/1000;
+
+    //Use node-fetch to retrieve the key for the Google APIs
+    fetch("../key.json")
+    .then(response => response.json())
+    .then(json => keys = json)
+    .then(keys => {
+        timezoneKey = keys.googleMapsKey
+        let timezoneURL =  "https://maps.googleapis.com/maps/api/timezone/json?location=" + location +"&timestamp="+timestamp+"&key=" + timezoneKey;
+
+        //Call the Google Timezone API to retrieve the timezone for the given city.
+        fetch(timezoneURL)
+        .then(response => response.json())
+        .then(json => {
+            timezone = json.timeZoneId;
+            console.log(timezone)})
+    })
     
     // Gather all the information necessary to send to Tomorrow.IO and turn it into a string.
     const getTimelineParameters =  queryString.stringify({
@@ -169,6 +177,36 @@ function acceptInput()
     else
         alert("Invalid Input!");
 }
+
+//This function loads the Google Maps JavaScript API into the index.html file by retrieve the key from key.json
+//and creating a script element at the end of the html.
+function loadMapsAPI()
+{
+    var mapsKey;
+
+    //Use node-fetch to get the key for the Google Maps API.
+    fetch("../key.json")
+    .then(response => response.json())
+    .then(json => keys = json)
+    .then(keys => {
+        mapsKey = keys.googleMapsKey
+        let mapsURL =  "https://maps.googleapis.com/maps/api/js?key=" + mapsKey;
+
+        //Create the new script element, add in the URL and then append it to body of the document.
+        let mapsScript = document.createElement("script");
+        mapsScript.setAttribute("src", mapsURL);
+    
+        document.body.appendChild(mapsScript);
+    
+        mapsScript.addEventListener("load", () => {console.log("File loaded");})
+    })
+}
+
+//Load in the Maps API at the start of execution.
+loadMapsAPI();
+
+//Call the acceptInput() function whenever the user clicks the submit button on the form.
+let form = document.getElementById("weatherInfo");
 
 form.addEventListener("submit", function(event){
         acceptInput();

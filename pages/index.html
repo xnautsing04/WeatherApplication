@@ -6,63 +6,53 @@
 </head>
 <body>
 
-<h1>Weather App</h1>
+<h1>U-Weather</h1>
 
 <form id ="weatherInfo" action = "javascript:void(0)">
-    <label for="cityName">City:</label><br>
+    <label for="cityName" class = "inputLabels">City:</label><br>
     <input type="text" id="cityName" name="cityName"><br>
-    <label for="stateName">State:</label><br>
+    <label for="stateName" class = "inputLabels">State:</label><br>
     <input type="text" id="stateName" name="stateName">
     <input type="submit" value="Submit">
 </form>
 
 <br>
 <br>
-
+<div class = "scrollmenu">
+<form id = "weatherResultToday" class = "mainForm">
 <h2>CURRENT:</h2>
-<form id = "weatherResultToday">
-<label id = "PI">Precipitation Intensity: </label> <br>
-<label id = "PT">Precipitation Type: </label> <br>
-<label id = "WS">Wind Speed: </label> <br>
-<label id = "WG">Wind Gust: </label> <br>
-<label id = "WD">Wind Direction: </label> <br>
-<label id = "T">Temperature: </label> <br>
-<label id = "TA">Temperature Apparent: </label> <br>
-<label id = "CC">Cloud Cover: </label> <br>
-<label id = "CB">Cloud Base: </label> <br> 
-<label id = "CCe">Cloud Ceiling: </label> <br>
-<label id = "WC">Weather Code: </label> <br>
+<label id = "PI" class = "dataLabels">Precipitation Intensity: </label> <br> <br> 
+<label id = "PT" class = "dataLabels">Precipitation Type: </label> <br> <br> 
+<label id = "WS" class = "dataLabels">Wind Speed: </label> <br> <br> 
+<label id = "WG" class = "dataLabels">Wind Gust: </label> <br> <br> 
+<label id = "WD" class = "dataLabels">Wind Direction: </label> <br> <br> 
+<label id = "T" class = "dataLabels">Temperature: </label> <br> <br> 
+<label id = "TA" class = "dataLabels">Temperature Apparent: </label> <br> <br> 
 </form>
 
-<h2>1 HOUR:</h2>
-<form id = "weatherResultHour">
-<label id = "PIH">Precipitation Intensity: </label> <br>
-<label id = "PTH">Precipitation Type: </label> <br>
-<label id = "WSH">Wind Speed: </label> <br>
-<label id = "WGH">Wind Gust: </label> <br>
-<label id = "WDH">Wind Direction: </label> <br>
-<label id = "TH">Temperature: </label> <br>
-<label id = "TAH">Temperature Apparent: </label> <br>
-<label id = "CCH">Cloud Cover: </label> <br>
-<label id = "CBH">Cloud Base: </label> <br> 
-<label id = "CCeH">Cloud Ceiling: </label> <br>
-<label id = "WCH">Weather Code: </label> <br>
+
+<form id = "weatherResultHour" class = "mainForm">
+<h2 >1 HOUR:</h2>
+<label id = "PIH" class = "dataLabels">Precipitation Intensity: </label> <br> <br> 
+<label id = "PTH" class = "dataLabels">Precipitation Type: </label> <br> <br> 
+<label id = "WSH" class = "dataLabels">Wind Speed: </label> <br> <br> 
+<label id = "WGH" class = "dataLabels">Wind Gust: </label> <br> <br> 
+<label id = "WDH" class = "dataLabels">Wind Direction: </label> <br> <br> 
+<label id = "TH" class = "dataLabels">Temperature: </label> <br> <br> 
+<label id = "TAH" class = "dataLabels">Temperature Apparent: </label> <br> <br> 
 </form>
 
-<h2>1 DAY:</h2>
-<form id = "weatherResultDay">
-<label id = "PID">Precipitation Intensity: </label> <br>
-<label id = "PTD">Precipitation Type: </label> <br>
-<label id = "WSD">Wind Speed: </label> <br>
-<label id = "WGD">Wind Gust: </label> <br>
-<label id = "WDD">Wind Direction: </label> <br>
-<label id = "TD">Temperature: </label> <br>
-<label id = "TAD">Temperature Apparent: </label> <br>
-<label id = "CCD">Cloud Cover: </label> <br>
-<label id = "CBD">Cloud Base: </label> <br> 
-<label id = "CCeD">Cloud Ceiling: </label> <br>
-<label id = "WCD">Weather Code: </label> <br>
+<form id = "weatherResultDay" class = "mainForm">
+<h2 >1 DAY:</h2>
+<label id = "PID" class = "dataLabels">Precipitation Intensity: </label> <br> <br> 
+<label id = "PTD" class = "dataLabels">Precipitation Type: </label> <br> <br> 
+<label id = "WSD" class = "dataLabels">Wind Speed: </label> <br> <br> 
+<label id = "WGD" class = "dataLabels">Wind Gust: </label> <br> <br> 
+<label id = "WDD" class = "dataLabels">Wind Direction: </label> <br> <br> 
+<label id = "TD" class = "dataLabels">Temperature: </label> <br> <br> 
+<label id = "TAD" class = "dataLabels">Temperature Apparent: </label> <br> <br> 
 </form>
+</div>
 
 <script src = "../js/bundle.js"></script>
 

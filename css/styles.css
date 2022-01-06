@@ -1,11 +1,46 @@
 body {
-    background-color: lightblue;
+    background-color: rgb(48, 36, 116);
   }
 
 h1 {
   text-align: center;
+  color: white;
+}
+
+h2 {
+  text-align: center;
+  color: white;
 }
 
 input[type=text]:focus {
   background-color: lightblue;
+}
+
+.inputLabels{
+  color:white;
+}
+
+.mainForm{
+  margin-right: 500px;
+}
+
+.dataLabels{
+  text-align: center;
+  border-style: outset;
+  border-color: grey;
+  border-left-width: 50px;
+  font-size:24px;
+  color: white;
+}
+
+div.scrollmenu{
+  overflow: auto;
+  white-space: nowrap;
+}
+
+div.scrollmenu form{
+  display: inline-block;
+  color: white;
+  padding: 14px;
+  text-decoration: none;
 }
