@@ -10,6 +10,5 @@ Currently, the keys for both the Google Maps JavaScript API and Tomorrow.IO API 
 
 The webpage currently functions, but this is a work-in-progress. Listed below are some of the planned improvements and additions:
 
-- Dynamically change the timezone based on the city given by the user.
 - Allow the user the customize what information is shown and the timesteps used.
 - Overhaul the look of the webpage with CSS.
