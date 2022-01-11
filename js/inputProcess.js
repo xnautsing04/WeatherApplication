@@ -9,7 +9,7 @@
 
 //moment.js is used to send compatible date and time information to the Tomorrow.IO API.
 const moment = require('moment');
-//node-fetch is used to comunicate with the APIs, as well as retrieving the keys from key.json
+//node-fetch is used to comunicate with the APIs, as well as retrieving the keys from key.json.
 const fetch = require('node-fetch');
 //query-string is used to organize the information needed to send to Tomorrow.IO API, including the key, location
 //information, and others that can be found below.
@@ -30,6 +30,7 @@ fetch("../key.json")
 
 // These are the fields retrieved from the Tomorrow.IO API and that will be displayed to the user.
 const fields = [
+    "precipitationProbability",
     "precipitationIntensity",
     "precipitationType",
     "windSpeed",
@@ -51,34 +52,207 @@ const timesteps = ["1m", "1h", "1d"];
 
 //This function takes in the weatherData gathered from Tomorrow.IO and pastes the information
 //on the forms found on the webpage.
-function displayWeatherData(weatherData)
+function displayWeatherData(weatherData, givenTimezone)
 {
-    //The following are for the current time.
-    document.getElementById("PI").innerHTML = "Precipitation Intensity: " + weatherData.data.timelines[0].intervals[0].values.precipitationIntensity;
-    document.getElementById("PT").innerHTML = "Precipitation Type: " + weatherData.data.timelines[0].intervals[0].values.precipitationType;
-    document.getElementById("WS").innerHTML = "Wind Speed: " + weatherData.data.timelines[0].intervals[0].values.windSpeed;
-    document.getElementById("WG").innerHTML = "Wind Gust: " + weatherData.data.timelines[0].intervals[0].values.windGust;
-    document.getElementById("WD").innerHTML = "Wind Direction: " + weatherData.data.timelines[0].intervals[0].values.windDirection;
-    document.getElementById("T").innerHTML = "Temperature: " + weatherData.data.timelines[0].intervals[0].values.temperature;
-    document.getElementById("TA").innerHTML = "Temperature Apparent: " + weatherData.data.timelines[0].intervals[0].values.temperatureApparent;
+    //Once the data is ready to be displayed, unhide the scroller and the switch.
+    console.log(weatherData);
+    document.getElementById("scrollid").hidden = false;
+    document.getElementById("dataSwitch").hidden = false;
 
-    //The following are for 1 hour.
-    document.getElementById("PIH").innerHTML = "Precipitation Intensity: " + weatherData.data.timelines[1].intervals[0].values.precipitationIntensity;
-    document.getElementById("PTH").innerHTML = "Precipitation Type: " + weatherData.data.timelines[1].intervals[0].values.precipitationType;
-    document.getElementById("WSH").innerHTML = "Wind Speed: " + weatherData.data.timelines[1].intervals[0].values.windSpeed;
-    document.getElementById("WGH").innerHTML = "Wind Gust: " + weatherData.data.timelines[1].intervals[0].values.windGust;
-    document.getElementById("WDH").innerHTML = "Wind Direction: " + weatherData.data.timelines[1].intervals[0].values.windDirection;
-    document.getElementById("TH").innerHTML = "Temperature: " + weatherData.data.timelines[1].intervals[0].values.temperature;
-    document.getElementById("TAH").innerHTML = "Temperature Apparent: " + weatherData.data.timelines[1].intervals[0].values.temperatureApparent;
+    //Gather the labels for the current time data.
+    let i = 1
+    let labid = "label"+i.toString();
+    let ppid = "PP"+i.toString();
+    let piid = "PI"+i.toString();
+    let ptid = "PT"+i.toString();
+    let wsid = "WS"+i.toString();
+    let wgid = "WG"+i.toString();
+    let wdid = "WD"+i.toString();
+    let tid = "T"+i.toString();
+    let taid = "TA"+i.toString();
 
-    //The following are for 1 day.
-    document.getElementById("PID").innerHTML = "Precipitation Intensity: " + weatherData.data.timelines[2].intervals[0].values.precipitationIntensity;
-    document.getElementById("PTD").innerHTML = "Precipitation Type: " + weatherData.data.timelines[2].intervals[0].values.precipitationType;
-    document.getElementById("WSD").innerHTML = "Wind Speed: " + weatherData.data.timelines[2].intervals[0].values.windSpeed;
-    document.getElementById("WGD").innerHTML = "Wind Gust: " + weatherData.data.timelines[2].intervals[0].values.windGust;
-    document.getElementById("WDD").innerHTML = "Wind Direction: " + weatherData.data.timelines[2].intervals[0].values.windDirection;
-    document.getElementById("TD").innerHTML = "Temperature: " + weatherData.data.timelines[2].intervals[0].values.temperature;
-    document.getElementById("TAD").innerHTML = "Temperature Apparent: " + weatherData.data.timelines[2].intervals[0].values.temperatureApparent;
+
+    //Translate the current time into the correct timezone for the given city.
+    let localDate = new Date(weatherData.data.timelines[0].intervals[0].startTime);
+    let rawDate = new Date(localDate.toLocaleString("en-US", {timeZone: givenTimezone}));
+
+    let displayDate = "";
+
+    //Add on the necessary date and time information by calling Date get functions.
+    displayDate += (rawDate.getMonth() + 1).toString() + "/";
+    displayDate += rawDate.getDate().toString() + "/";
+    displayDate += rawDate.getFullYear().toString();
+
+    displayDate += " ";
+
+    let timeM = " ";
+
+    if (rawDate.getHours().toString() == 0)
+    {
+        displayDate += "12:";
+        timeM = "AM";
+    }
+    else if (rawDate.getHours().toString() <= 11)
+    {
+        displayDate += rawDate.getHours().toString() + ":";
+        timeM = "AM";
+    }
+    else if (rawDate.getHours().toString() == 12)
+    {
+        displayDate += "12:";
+        timeM = "PM";
+    }
+    else
+    {
+        displayDate += (rawDate.getHours() -12).toString() + ":";
+        timeM = "PM";
+    }
+
+    if (rawDate.getMinutes() <= 9)
+        displayDate += "0";
+    
+    displayDate += rawDate.getMinutes() + timeM;
+    
+
+    //Place all information onto the labels correctly.
+    document.getElementById(labid).innerHTML = displayDate;
+    document.getElementById(ppid).innerHTML = "Precipitation Probability: "+ weatherData.data.timelines[0].intervals[0].values.precipitationProbability + "%";
+    document.getElementById(piid).innerHTML = "Precipitation Intensity: " + weatherData.data.timelines[0].intervals[0].values.precipitationIntensity + " in/h";
+    
+    //Using the documentation for Tomorrow.IO, convert the number codes into text for the precipiation type.
+    let type =  weatherData.data.timelines[0].intervals[0].values.precipitationType;
+    var wordType = "";
+
+        if (type == 0)
+            wordType = "N/A";
+        else if (type == 1)
+            wordType = "Rain"
+        else if (type == 2)
+            wordType = "Snow"
+        else if (type == 3)
+            wordType = "Freezing Rain"
+        else
+            wordType = "Ice Pellets"
+        
+    document.getElementById(ptid).innerHTML = "Precipitation Type: " + wordType;
+    document.getElementById(wsid).innerHTML = "Wind Speed: " + weatherData.data.timelines[0].intervals[0].values.windSpeed + " mph";
+    document.getElementById(wdid).innerHTML = "Wind Direction: " + weatherData.data.timelines[0].intervals[0].values.windDirection + " degrees";
+    document.getElementById(tid).innerHTML = "Temperature: " + weatherData.data.timelines[0].intervals[0].values.temperature + " F";
+
+    for (let i = 2; i <= 24; ++i)
+    {
+        //Repeat the above process for all forms regarding the 24-hour forecast.
+        let labid = "label"+(i+1).toString();
+        let ppid = "PP"+(i+1).toString()
+        let piid = "PI"+(i+1).toString();
+        let ptid = "PT"+(i+1).toString();
+        let wsid = "WS"+(i+1).toString();
+        let wgid = "WG"+(i+1).toString();
+        let wdid = "WD"+(i+1).toString();
+        let tid = "T"+(i+1).toString();
+        let taid = "TA"+(i+1).toString();
+
+        localDate = new Date(weatherData.data.timelines[1].intervals[i-1].startTime)
+        rawDate = new Date(localDate.toLocaleString("en-US", {timeZone: givenTimezone}));
+
+        //Only display the time, not the month.
+        displayDate;
+        if (rawDate.getHours().toString() == 0)
+            displayDate = "12:00AM";
+        else if (rawDate.getHours().toString() <= 11)
+            displayDate = rawDate.getHours().toString() + ":00AM";
+        else if (rawDate.getHours().toString() == 12)
+            displayDate = "12:00PM";
+        else
+            displayDate = (rawDate.getHours() -12).toString() + ":00PM";
+
+        // Get Time in 12-Hour System
+        document.getElementById(labid).innerHTML = displayDate;
+        document.getElementById(ppid).innerHTML = "Precipitation Probability: "+ weatherData.data.timelines[1].intervals[i-1].values.precipitationProbability + "%";
+        document.getElementById(piid).innerHTML = "Precipitation Intensity: " + weatherData.data.timelines[1].intervals[i-1].values.precipitationIntensity + " in/h";
+        
+        let type =  weatherData.data.timelines[1].intervals[i-1].values.precipitationType;
+        var wordType = "";
+
+        if (type == 0)
+            wordType = "N/A";
+        else if (type == 1)
+            wordType = "Rain"
+        else if (type == 2)
+            wordType = "Snow"
+        else if (type == 3)
+            wordType = "Freezing Rain"
+        else
+            wordType = "Ice Pellets"
+        
+        document.getElementById(ptid).innerHTML = "Precipitation Type: " + wordType;
+        document.getElementById(wsid).innerHTML = "Wind Speed: " + weatherData.data.timelines[1].intervals[i-1].values.windSpeed + " mph";
+        document.getElementById(wdid).innerHTML = "Wind Direction: " + weatherData.data.timelines[1].intervals[i-1].values.windDirection + " degrees";
+        document.getElementById(tid).innerHTML = "Temperature: " + weatherData.data.timelines[1].intervals[i-1].values.temperature + " F";
+    }
+
+    for (let i = 2; i <= 7; ++i)
+    {
+        //Repeat a final time for all labels related to the 7-day forecast.
+        let labid = "label"+(i+25).toString();
+        let ppid = "PP"+(i+25).toString()
+        let piid = "PI"+(i+25).toString();
+        let ptid = "PT"+(i+25).toString();
+        let wsid = "WS"+(i+25).toString();
+        let wgid = "WG"+(i+25).toString();
+        let wdid = "WD"+(i+25).toString();
+        let tid = "T"+(i+25).toString();
+        let taid = "TA"+(i+25).toString();
+
+        //Only display the date, not the time.
+
+        localDate = new Date(weatherData.data.timelines[2].intervals[i-1].startTime);
+        rawDate = new Date(localDate.toLocaleString("en-US", {timeZone: givenTimezone}));
+        displayDate = "";
+
+        displayDate += (rawDate.getMonth() + 1).toString() + "/";
+        displayDate += rawDate.getDate().toString() + "/";
+        displayDate += rawDate.getFullYear().toString();
+
+        document.getElementById(labid).innerHTML = displayDate;
+        document.getElementById(ppid).innerHTML = "Precipitation Probability: "+ weatherData.data.timelines[2].intervals[i-1].values.precipitationProbability+ "%";
+        document.getElementById(piid).innerHTML = "Precipitation Intensity: " + weatherData.data.timelines[2].intervals[i-1].values.precipitationIntensity + " in/h";
+        
+        let type =  weatherData.data.timelines[2].intervals[i-1].values.precipitationType;
+        var wordType = "";
+
+        if (type == 0)
+            wordType = "N/A";
+        else if (type == 1)
+            wordType = "Rain"
+        else if (type == 2)
+            wordType = "Snow"
+        else if (type == 3)
+            wordType = "Freezing Rain"
+        else
+            wordType = "Ice Pellets"
+        
+        document.getElementById(ptid).innerHTML = "Precipitation Type: " + wordType;
+        document.getElementById(wsid).innerHTML = "Wind Speed: " + weatherData.data.timelines[2].intervals[i-1].values.windSpeed + " mph";
+        document.getElementById(wdid).innerHTML = "Wind Direction: " + weatherData.data.timelines[2].intervals[i-1].values.windDirection + " degrees";
+        document.getElementById(tid).innerHTML = "Temperature: " + weatherData.data.timelines[2].intervals[i-1].values.temperature + " F";
+    }
+
+    var days = document.getElementsByClassName("dailyForm");
+    var hours = document.getElementsByClassName("hourlyForm");
+
+    
+
+    //This ensures that the data is in 7-day forecast mode on default by changing the styles.
+    Array.from(hours).forEach(hour => {
+        hour.style.display="none";
+    })
+
+    Array.from(days).forEach(day => {
+        day.style.display="inline-block";
+    })
+
+    document.getElementById("checker").checked = false;
 }
 
 //This function gathers the necessary information to call Tomorrow.IO and makes the call with node-fetch.
@@ -89,7 +263,7 @@ function weatherCall(location)
     //Call the moment.utc() function to get the valid time frames for the forecast.
     const now = moment.utc();
     const startTime = moment.utc(now).add(0, "minutes").toISOString();
-    const endTime = moment.utc(now).add(2, "days").toISOString(); 
+    const endTime = moment.utc(now).add(8, "days").toISOString(); 
 
     //The timezone of the city entered by the user.
     var timezone;
@@ -133,7 +307,7 @@ function weatherCall(location)
     fetch(getTimelineURL + "?" + getTimelineParameters, {method: "GET"})
     .then((result) => result.json())
     .then(data => weatherData = data)
-    .then(weatherData => displayWeatherData(weatherData))
+    .then(weatherData => displayWeatherData(weatherData, timezone))
     .catch((error) => console.error("error: " + error));
 
 }
@@ -207,7 +381,42 @@ loadMapsAPI();
 
 //Call the acceptInput() function whenever the user clicks the submit button on the form.
 let form = document.getElementById("weatherInfo");
+let switchData = document.getElementById("checker");
 
 form.addEventListener("submit", function(event){
         acceptInput();
+});
+
+//Whenever the user changes the switch, call this function so that the data being displayed will change.
+switchData.addEventListener("change", function(){
+    var days = document.getElementsByClassName("dailyForm");
+    var hours = document.getElementsByClassName("hourlyForm");
+    console.log(days.length);
+    
+    //If the checkbox is checked, then switch to 24-hour Forecast.
+    if (this.checked)
+    {
+        document.getElementById("dataType").textContent = "24-Hour Forecast";
+
+        Array.from(days).forEach(day =>{
+            day.style.display="none";
+        })
+
+        Array.from(hours).forEach(hour => {
+            hour.style.display="inline-block";
+        })
+    }
+    //If checkbox is not checked, then switch to 7-Day Forecast
+    else
+    {
+        document.getElementById("dataType").textContent = "7-Day Forecast";
+
+        Array.from(hours).forEach(hour => {
+            hour.style.display="none";
+        })
+
+        Array.from(days).forEach(day => {
+            day.style.display="inline-block";
+        })
+    }
 });

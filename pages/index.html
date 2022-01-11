@@ -3,58 +3,511 @@
 <head>
     <link rel="shortcut icon" href="#" />
     <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/switch.css">
 </head>
 <body>
 
-<h1>U-Weather</h1>
+    <h1>Pixel Weather</h1>
 
-<form id ="weatherInfo" action = "javascript:void(0)">
-    <label for="cityName" class = "inputLabels">City:</label><br>
-    <input type="text" id="cityName" name="cityName"><br>
-    <label for="stateName" class = "inputLabels">State:</label><br>
-    <input type="text" id="stateName" name="stateName">
-    <input type="submit" value="Submit">
+    <form id ="weatherInfo" action = "javascript:void(0)">
+        <label for="cityName" class = "inputLabels">City:</label><br>
+        <input type="text" id="cityName" name="cityName"><br>
+        <label for="stateName" class = "inputLabels">State:</label><br>
+        <input type="text" id="stateName" name="stateName">
+        <input type="submit" value="Submit">
+    </form>
+
+    <div id="dataSwitch" hidden>
+        <h1 id = "dataType">7-Day Forecast</h1>
+        <label class="switch">
+            <input type="checkbox" id = "checker">
+            <span class="slider"></span>
+        </label>
+    </div>  
+
+    <div class = "scrollmenu" id = "scrollid" hidden>
+        <form id = "weatherResultToday" class = "mainForm">
+            <h2 id = "label1">CURRENT:</h2>
+            <img src="../images/cloud.png" alt="cloud_Icon">
+            <label id = "PP1" class = "dataLabels">Precipitation Probability: </label> <br> <br>
+            <img src="../images/raindrop.png" alt="rain_Icon">
+            <label id = "PI1" class = "dataLabels">Precipitation Intensity: </label> <br> <br> 
+            <img src="../images/snowflake.png" alt="snow_Icon">
+            <label id = "PT1" class = "dataLabels">Precipitation Type: </label> <br> <br> 
+            <img src="../images/wind.png" alt="wind_Icon">
+            <label id = "WS1" class = "dataLabels">Wind Speed: </label> <br> <br> 
+            <img src="../images/compas.png" alt="compass_Icon">
+            <label id = "WD1" class = "dataLabels">Wind Direction: </label> <br> <br> 
+            <img src="../images/Sun.png" alt="Sun_Icon">
+            <label id = "T1" class = "dataLabels">Temperature: </label> <br> <br> 
+        </form>
+
+        <form id = "weatherResultHour2" class = "hourlyForm">
+            <h2 id = "label3">2 HOURS:</h2>
+            <img src="../images/cloud.png" alt="cloud_Icon">
+            <label id = "PP3" class = "dataLabels">Precipitation Probability: </label> <br> <br>
+            <img src="../images/raindrop.png" alt="rain_Icon">
+            <label id = "PI3" class = "dataLabels">Precipitation Intensity: </label> <br> <br> 
+            <img src="../images/snowflake.png" alt="snow_Icon">
+            <label id = "PT3" class = "dataLabels">Precipitation Type: </label> <br> <br> 
+            <img src="../images/wind.png" alt="wind_Icon">
+            <label id = "WS3" class = "dataLabels">Wind Speed: </label> <br> <br> 
+            <img src="../images/compas.png" alt="compass_Icon">
+            <label id = "WD3" class = "dataLabels">Wind Direction: </label> <br> <br> 
+            <img src="../images/Sun.png" alt="Sun_Icon">
+            <label id = "T3" class = "dataLabels">Temperature: </label> <br> <br> 
+        </form>
+
+        <form id = "weatherResultHour3" class = "hourlyForm">
+            <h2 id = "label4">3 HOURS:</h2>
+            <img src="../images/cloud.png" alt="cloud_Icon">
+            <label id = "PP4" class = "dataLabels">Precipitation Probability: </label> <br> <br>
+            <img src="../images/raindrop.png" alt="rain_Icon">
+            <label id = "PI4" class = "dataLabels">Precipitation Intensity: </label> <br> <br> 
+            <img src="../images/snowflake.png" alt="snow_Icon">
+            <label id = "PT4" class = "dataLabels">Precipitation Type: </label> <br> <br> 
+            <img src="../images/wind.png" alt="wind_Icon">
+            <label id = "WS4" class = "dataLabels">Wind Speed: </label> <br> <br> 
+            <img src="../images/compas.png" alt="compass_Icon">
+            <label id = "WD4" class = "dataLabels">Wind Direction: </label> <br> <br> 
+            <img src="../images/Sun.png" alt="Sun_Icon">
+            <label id = "T4" class = "dataLabels">Temperature: </label> <br> <br> 
+        </form>
+            
+        <form id = "weatherResultHour4" class = "hourlyForm">
+            <h2 id = "label5">4 HOURS:</h2>
+            <img src="../images/cloud.png" alt="cloud_Icon">
+            <label id = "PP5" class = "dataLabels">Precipitation Probability: </label> <br> <br>
+            <img src="../images/raindrop.png" alt="rain_Icon">
+            <label id = "PI5" class = "dataLabels">Precipitation Intensity: </label> <br> <br> 
+            <img src="../images/snowflake.png" alt="snow_Icon">
+            <label id = "PT5" class = "dataLabels">Precipitation Type: </label> <br> <br> 
+            <img src="../images/wind.png" alt="wind_Icon">
+            <label id = "WS5" class = "dataLabels">Wind Speed: </label> <br> <br> 
+            <img src="../images/compas.png" alt="compass_Icon">
+            <label id = "WD5" class = "dataLabels">Wind Direction: </label> <br> <br> 
+            <img src="../images/Sun.png" alt="Sun_Icon">
+            <label id = "T5" class = "dataLabels">Temperature: </label> <br> <br> 
+        </form>
+
+        <form id = "weatherResultHour5" class = "hourlyForm">
+            <h2 id = "label6">5 HOURS:</h2>
+            <img src="../images/cloud.png" alt="cloud_Icon">
+            <label id = "PP6" class = "dataLabels">Precipitation Probability: </label> <br> <br>
+            <img src="../images/raindrop.png" alt="rain_Icon">
+            <label id = "PI6" class = "dataLabels">Precipitation Intensity: </label> <br> <br> 
+            <img src="../images/snowflake.png" alt="snow_Icon">
+            <label id = "PT6" class = "dataLabels">Precipitation Type: </label> <br> <br> 
+            <img src="../images/wind.png" alt="wind_Icon">
+            <label id = "WS6" class = "dataLabels">Wind Speed: </label> <br> <br>  
+            <img src="../images/compas.png" alt="compass_Icon">
+            <label id = "WD6" class = "dataLabels">Wind Direction: </label> <br> <br> 
+            <img src="../images/Sun.png" alt="Sun_Icon">
+            <label id = "T6" class = "dataLabels">Temperature: </label> <br> <br> 
+        </form>  
+
+        <form id = "weatherResultHour6" class = "hourlyForm">
+            <h2 id = "label7">6 HOURS:</h2>
+            <img src="../images/cloud.png" alt="cloud_Icon">
+            <label id = "PP7" class = "dataLabels">Precipitation Probability: </label> <br> <br>
+            <img src="../images/raindrop.png" alt="rain_Icon">
+            <label id = "PI7" class = "dataLabels">Precipitation Intensity: </label> <br> <br> 
+            <img src="../images/snowflake.png" alt="snow_Icon">
+            <label id = "PT7" class = "dataLabels">Precipitation Type: </label> <br> <br> 
+            <img src="../images/wind.png" alt="wind_Icon">
+            <label id = "WS7" class = "dataLabels">Wind Speed: </label> <br> <br> 
+            <img src="../images/compas.png" alt="compass_Icon">
+            <label id = "WD7" class = "dataLabels">Wind Direction: </label> <br> <br> 
+            <img src="../images/Sun.png" alt="Sun_Icon">
+            <label id = "T7" class = "dataLabels">Temperature: </label> <br> <br> 
+        </form>
+            
+        <form id = "weatherResultHour7" class = "hourlyForm">
+                <h2 id = "label8" >7 HOURS:</h2>
+                <img src="../images/cloud.png" alt="cloud_Icon">
+                <label id = "PP8" class = "dataLabels">Precipitation Probability: </label> <br> <br>
+                <img src="../images/raindrop.png" alt="rain_Icon">
+                <label id = "PI8" class = "dataLabels">Precipitation Intensity: </label> <br> <br> 
+                <img src="../images/snowflake.png" alt="snow_Icon">
+                <label id = "PT8" class = "dataLabels">Precipitation Type: </label> <br> <br> 
+                <img src="../images/wind.png" alt="wind_Icon">
+                <label id = "WS8" class = "dataLabels">Wind Speed: </label> <br> <br> 
+                <img src="../images/compas.png" alt="compass_Icon">
+                <label id = "WD8" class = "dataLabels">Wind Direction: </label> <br> <br> 
+                <img src="../images/Sun.png" alt="Sun_Icon">
+                <label id = "T8" class = "dataLabels">Temperature: </label> <br> <br> 
+        </form>
+            
+        <form id = "weatherResultHour8" class = "hourlyForm">
+                <h2 id = "label9">8 HOURS:</h2>
+                <img src="../images/cloud.png" alt="cloud_Icon">
+                <label id = "PP9" class = "dataLabels">Precipitation Probability: </label> <br> <br>
+                <img src="../images/raindrop.png" alt="rain_Icon">
+                <label id = "PI9" class = "dataLabels">Precipitation Intensity: </label> <br> <br> 
+                <img src="../images/snowflake.png" alt="snow_Icon">
+                <label id = "PT9" class = "dataLabels">Precipitation Type: </label> <br> <br> 
+                <img src="../images/wind.png" alt="wind_Icon">
+                <label id = "WS9" class = "dataLabels">Wind Speed: </label> <br> <br> 
+                <img src="../images/compas.png" alt="compass_Icon">
+                <label id = "WD9" class = "dataLabels">Wind Direction: </label> <br> <br> 
+                <img src="../images/Sun.png" alt="Sun_Icon">
+                <label id = "T9" class = "dataLabels">Temperature: </label> <br> <br> 
+        </form>
+
+        <form id = "weatherResultHour9" class = "hourlyForm">
+            <h2 id = "label10">9 HOURS:</h2>
+            <img src="../images/cloud.png" alt="cloud_Icon">
+            <label id = "PP10" class = "dataLabels">Precipitation Probability: </label> <br> <br>
+            <img src="../images/raindrop.png" alt="rain_Icon">
+            <label id = "PI10" class = "dataLabels">Precipitation Intensity: </label> <br> <br> 
+            <img src="../images/snowflake.png" alt="snow_Icon">
+            <label id = "PT10" class = "dataLabels">Precipitation Type: </label> <br> <br> 
+            <img src="../images/wind.png" alt="wind_Icon">
+            <label id = "WS10" class = "dataLabels">Wind Speed: </label> <br> <br> 
+            <img src="../images/compas.png" alt="compass_Icon">
+            <label id = "WD10" class = "dataLabels">Wind Direction: </label> <br> <br> 
+            <img src="../images/Sun.png" alt="Sun_Icon">
+            <label id = "T10" class = "dataLabels">Temperature: </label> <br> <br> 
+        </form>
+            
+        <form id = "weatherResultHour10" class = "hourlyForm">
+            <h2 id = "label11">10 HOURS:</h2>
+            <img src="../images/cloud.png" alt="cloud_Icon">
+            <label id = "PP11" class = "dataLabels">Precipitation Probability: </label> <br> <br>
+            <img src="../images/raindrop.png" alt="rain_Icon">
+            <label id = "PI11" class = "dataLabels">Precipitation Intensity: </label> <br> <br> 
+            <img src="../images/snowflake.png" alt="snow_Icon">
+            <label id = "PT11" class = "dataLabels">Precipitation Type: </label> <br> <br> 
+            <img src="../images/wind.png" alt="wind_Icon">
+            <label id = "WS11" class = "dataLabels">Wind Speed: </label> <br> <br> 
+            <img src="../images/compas.png" alt="compass_Icon">
+            <label id = "WD11" class = "dataLabels">Wind Direction: </label> <br> <br> 
+            <img src="../images/Sun.png" alt="Sun_Icon">
+            <label id = "T11" class = "dataLabels">Temperature: </label> <br> <br> 
+        </form>
+            
+        <form id = "weatherResultHour11" class = "hourlyForm">
+                <h2 id = "label12">11 HOURS:</h2>
+                <img src="../images/cloud.png" alt="cloud_Icon">
+                <label id = "PP12" class = "dataLabels">Precipitation Probability: </label> <br> <br>
+                <img src="../images/raindrop.png" alt="rain_Icon">
+                <label id = "PI12" class = "dataLabels">Precipitation Intensity: </label> <br> <br> 
+                <img src="../images/snowflake.png" alt="snow_Icon">
+                <label id = "PT12" class = "dataLabels">Precipitation Type: </label> <br> <br> 
+                <img src="../images/wind.png" alt="wind_Icon">
+                <label id = "WS12" class = "dataLabels">Wind Speed: </label> <br> <br> 
+                <img src="../images/compas.png" alt="compass_Icon">
+                <label id = "WD12" class = "dataLabels">Wind Direction: </label> <br> <br> 
+                <img src="../images/Sun.png" alt="Sun_Icon">
+                <label id = "T12" class = "dataLabels">Temperature: </label> <br> <br> 
+        </form>
+            
+        <form id = "weatherResultHour12" class = "hourlyForm">
+                <h2 id = "label13">12 HOURS:</h2>
+                <img src="../images/cloud.png" alt="cloud_Icon">
+                <label id = "PP13" class = "dataLabels">Precipitation Probability: </label> <br> <br>
+                <img src="../images/raindrop.png" alt="rain_Icon">
+                <label id = "PI13" class = "dataLabels">Precipitation Intensity: </label> <br> <br> 
+                <img src="../images/snowflake.png" alt="snow_Icon">
+                <label id = "PT13" class = "dataLabels">Precipitation Type: </label> <br> <br> 
+                <img src="../images/wind.png" alt="wind_Icon">
+                <label id = "WS13" class = "dataLabels">Wind Speed: </label> <br> <br> 
+                <img src="../images/compas.png" alt="compass_Icon">
+                <label id = "WD13" class = "dataLabels">Wind Direction: </label> <br> <br> 
+                <img src="../images/Sun.png" alt="Sun_Icon">
+                <label id = "T13" class = "dataLabels">Temperature: </label> <br> <br> 
+        </form>
+
+        <form id = "weatherResultHour13" class = "hourlyForm">
+                <h2 id = "label14">13 HOURS:</h2>
+                <img src="../images/cloud.png" alt="cloud_Icon">
+                <label id = "PP14" class = "dataLabels">Precipitation Probability: </label> <br> <br>
+                <img src="../images/raindrop.png" alt="rain_Icon">
+                <label id = "PI14" class = "dataLabels">Precipitation Intensity: </label> <br> <br> 
+                <img src="../images/snowflake.png" alt="snow_Icon">
+                <label id = "PT14" class = "dataLabels">Precipitation Type: </label> <br> <br> 
+                <img src="../images/wind.png" alt="wind_Icon">
+                <label id = "WS14" class = "dataLabels">Wind Speed: </label> <br> <br> 
+                <img src="../images/compas.png" alt="compass_Icon">
+                <label id = "WD14" class = "dataLabels">Wind Direction: </label> <br> <br> 
+                <img src="../images/Sun.png" alt="Sun_Icon">
+                <label id = "T14" class = "dataLabels">Temperature: </label> <br> <br> 
+        </form>
+                
+        <form id = "weatherResultHour14" class = "hourlyForm">
+                <h2 id = "label15">14 HOURS:</h2>
+                <img src="../images/cloud.png" alt="cloud_Icon">
+                <label id = "PP15" class = "dataLabels">Precipitation Probability: </label> <br> <br>
+                <img src="../images/raindrop.png" alt="rain_Icon">
+                <label id = "PI15" class = "dataLabels">Precipitation Intensity: </label> <br> <br> 
+                <img src="../images/snowflake.png" alt="snow_Icon">
+                <label id = "PT15" class = "dataLabels">Precipitation Type: </label> <br> <br> 
+                <img src="../images/wind.png" alt="wind_Icon">
+                <label id = "WS15" class = "dataLabels">Wind Speed: </label> <br> <br> 
+                <img src="../images/compas.png" alt="compass_Icon">
+                <label id = "WD15" class = "dataLabels">Wind Direction: </label> <br> <br> 
+                <img src="../images/Sun.png" alt="Sun_Icon">
+                <label id = "T15" class = "dataLabels">Temperature: </label> <br> <br> 
+        </form>
+                
+        <form id = "weatherResultHour15" class = "hourlyForm">
+                    <h2 id = "label16">15 HOURS:</h2>
+                    <img src="../images/cloud.png" alt="cloud_Icon">
+                    <label id = "PP16" class = "dataLabels">Precipitation Probability: </label> <br> <br>
+                    <img src="../images/raindrop.png" alt="rain_Icon">
+                    <label id = "PI16" class = "dataLabels">Precipitation Intensity: </label> <br> <br> 
+                    <img src="../images/snowflake.png" alt="snow_Icon">
+                    <label id = "PT16" class = "dataLabels">Precipitation Type: </label> <br> <br> 
+                    <img src="../images/wind.png" alt="wind_Icon">
+                    <label id = "WS16" class = "dataLabels">Wind Speed: </label> <br> <br> 
+                    <img src="../images/compas.png" alt="compass_Icon">
+                    <label id = "WD16" class = "dataLabels">Wind Direction: </label> <br> <br> 
+                    <img src="../images/Sun.png" alt="Sun_Icon">
+                    <label id = "T16" class = "dataLabels">Temperature: </label> <br> <br> 
+        </form>
+
+        <form id = "weatherResultHour16" class = "hourlyForm">
+                    <h2 id = "label17">16 HOURS:</h2>
+                    <img src="../images/cloud.png" alt="cloud_Icon">
+                    <label id = "PP17" class = "dataLabels">Precipitation Probability: </label> <br> <br>
+                    <img src="../images/raindrop.png" alt="rain_Icon">
+                    <label id = "PI17" class = "dataLabels">Precipitation Intensity: </label> <br> <br> 
+                    <img src="../images/snowflake.png" alt="snow_Icon">
+                    <label id = "PT17" class = "dataLabels">Precipitation Type: </label> <br> <br> 
+                    <img src="../images/wind.png" alt="wind_Icon">
+                    <label id = "WS17" class = "dataLabels">Wind Speed: </label> <br> <br> 
+                    <img src="../images/compas.png" alt="compass_Icon">
+                    <label id = "WD17" class = "dataLabels">Wind Direction: </label> <br> <br> 
+                    <img src="../images/Sun.png" alt="Sun_Icon">
+                    <label id = "T17" class = "dataLabels">Temperature: </label> <br> <br> 
+        </form>
+
+        <form id = "weatherResultHour17" class = "hourlyForm">
+            <h2 id = "label18">17 HOURS:</h2>
+            <img src="../images/cloud.png" alt="cloud_Icon">
+            <label id = "PP18" class = "dataLabels">Precipitation Probability: </label> <br> <br>
+            <img src="../images/raindrop.png" alt="rain_Icon">
+            <label id = "PI18" class = "dataLabels">Precipitation Intensity: </label> <br> <br> 
+            <img src="../images/snowflake.png" alt="snow_Icon">
+            <label id = "PT18" class = "dataLabels">Precipitation Type: </label> <br> <br> 
+            <img src="../images/wind.png" alt="wind_Icon">
+            <label id = "WS18" class = "dataLabels">Wind Speed: </label> <br> <br> 
+            <img src="../images/compas.png" alt="compass_Icon">
+            <label id = "WD18" class = "dataLabels">Wind Direction: </label> <br> <br> 
+            <img src="../images/Sun.png" alt="Sun_Icon">
+            <label id = "T18" class = "dataLabels">Temperature: </label> <br> <br> 
+        </form>
+            
+        <form id = "weatherResultHour18" class = "hourlyForm">
+            <h2 id = "label19">18 HOURS:</h2>
+            <img src="../images/cloud.png" alt="cloud_Icon">
+            <label id = "PP19" class = "dataLabels">Precipitation Probability: </label> <br> <br>
+            <img src="../images/raindrop.png" alt="rain_Icon">
+            <label id = "PI19" class = "dataLabels">Precipitation Intensity: </label> <br> <br> 
+            <img src="../images/snowflake.png" alt="snow_Icon">
+            <label id = "PT19" class = "dataLabels">Precipitation Type: </label> <br> <br> 
+            <img src="../images/wind.png" alt="wind_Icon">
+            <label id = "WS19" class = "dataLabels">Wind Speed: </label> <br> <br> 
+            <img src="../images/compas.png" alt="compass_Icon">
+            <label id = "WD19" class = "dataLabels">Wind Direction: </label> <br> <br> 
+            <img src="../images/Sun.png" alt="Sun_Icon">
+            <label id = "T19" class = "dataLabels">Temperature: </label> <br> <br> 
+        </form>
+
+        <form id = "weatherResultHour19" class = "hourlyForm">
+                <h2 id = "label20">19 HOURS:</h2>
+                <img src="../images/cloud.png" alt="cloud_Icon">
+                <label id = "PP20" class = "dataLabels">Precipitation Probability: </label> <br> <br>
+                <img src="../images/raindrop.png" alt="rain_Icon">
+                <label id = "PI20" class = "dataLabels">Precipitation Intensity: </label> <br> <br> 
+                <img src="../images/snowflake.png" alt="snow_Icon">
+                <label id = "PT20" class = "dataLabels">Precipitation Type: </label> <br> <br> 
+                <img src="../images/wind.png" alt="wind_Icon">
+                <label id = "WS20" class = "dataLabels">Wind Speed: </label> <br> <br> 
+                <img src="../images/compas.png" alt="compass_Icon">
+                <label id = "WD20" class = "dataLabels">Wind Direction: </label> <br> <br> 
+                <img src="../images/Sun.png" alt="Sun_Icon">
+                <label id = "T20" class = "dataLabels">Temperature: </label> <br> <br> 
+        </form>
+                
+        <form id = "weatherResultHour20" class = "hourlyForm">
+                <h2 id = "label21">20 HOURS:</h2>
+                <img src="../images/cloud.png" alt="cloud_Icon">
+                <label id = "PP21" class = "dataLabels">Precipitation Probability: </label> <br> <br>
+                <img src="../images/raindrop.png" alt="rain_Icon">
+                <label id = "PI21" class = "dataLabels">Precipitation Intensity: </label> <br> <br> 
+                <img src="../images/snowflake.png" alt="snow_Icon">
+                <label id = "PT21" class = "dataLabels">Precipitation Type: </label> <br> <br> 
+                <img src="../images/wind.png" alt="wind_Icon">
+                <label id = "WS21" class = "dataLabels">Wind Speed: </label> <br> <br> 
+                <img src="../images/compas.png" alt="compass_Icon">
+                <label id = "WD21" class = "dataLabels">Wind Direction: </label> <br> <br> 
+                <img src="../images/Sun.png" alt="Sun_Icon">
+                <label id = "T21" class = "dataLabels">Temperature: </label> <br> <br> 
+        </form>
+            
+        <form id = "weatherResultHour21" class = "hourlyForm">
+                <h2 id = "label22">21 HOURS:</h2>
+                <img src="../images/cloud.png" alt="cloud_Icon">
+                <label id = "PP22" class = "dataLabels">Precipitation Probability: </label> <br> <br>
+                <img src="../images/raindrop.png" alt="rain_Icon">
+                <label id = "PI22" class = "dataLabels">Precipitation Intensity: </label> <br> <br> 
+                <img src="../images/snowflake.png" alt="snow_Icon">
+                <label id = "PT22" class = "dataLabels">Precipitation Type: </label> <br> <br> 
+                <img src="../images/wind.png" alt="wind_Icon">
+                <label id = "WS22" class = "dataLabels">Wind Speed: </label> <br> <br> 
+                <img src="../images/compas.png" alt="compass_Icon">
+                <label id = "WD22" class = "dataLabels">Wind Direction: </label> <br> <br> 
+                <img src="../images/Sun.png" alt="Sun_Icon">
+                <label id = "T22" class = "dataLabels">Temperature: </label> <br> <br> 
+        </form>
+                
+        <form id = "weatherResultHour22" class = "hourlyForm">
+                <h2 id = "label23">22 HOURS:</h2>
+                <img src="../images/cloud.png" alt="cloud_Icon">
+                <label id = "PP23" class = "dataLabels">Precipitation Probability: </label> <br> <br>
+                <img src="../images/raindrop.png" alt="rain_Icon">
+                <label id = "PI23" class = "dataLabels">Precipitation Intensity: </label> <br> <br> 
+                <img src="../images/snowflake.png" alt="snow_Icon">
+                <label id = "PT23" class = "dataLabels">Precipitation Type: </label> <br> <br> 
+                <img src="../images/wind.png" alt="wind_Icon">
+                <label id = "WS23" class = "dataLabels">Wind Speed: </label> <br> <br> 
+                <img src="../images/compas.png" alt="compass_Icon">
+                <label id = "WD23" class = "dataLabels">Wind Direction: </label> <br> <br> 
+                <img src="../images/Sun.png" alt="Sun_Icon">
+                <label id = "T23" class = "dataLabels">Temperature: </label> <br> <br> 
+        </form>
+                
+        <form id = "weatherResultHour23" class = "hourlyForm">
+                    <h2 id = "label24">23 HOURS:</h2>
+                    <img src="../images/cloud.png" alt="cloud_Icon">
+                    <label id = "PP24" class = "dataLabels">Precipitation Probability: </label> <br> <br>
+                    <img src="../images/raindrop.png" alt="rain_Icon">
+                    <label id = "PI24" class = "dataLabels">Precipitation Intensity: </label> <br> <br> 
+                    <img src="../images/snowflake.png" alt="snow_Icon">
+                    <label id = "PT24" class = "dataLabels">Precipitation Type: </label> <br> <br> 
+                    <img src="../images/wind.png" alt="wind_Icon">
+                    <label id = "WS24" class = "dataLabels">Wind Speed: </label> <br> <br> 
+                    <img src="../images/compas.png" alt="compass_Icon">
+                    <label id = "WD24" class = "dataLabels">Wind Direction: </label> <br> <br> 
+                    <img src="../images/Sun.png" alt="Sun_Icon">
+                    <label id = "T24" class = "dataLabels">Temperature: </label> <br> <br> 
+        </form>
+
+        <form id = "weatherResultHour24" class = "hourlyForm">
+            <h2 id = "label25">43 HOURS:</h2>
+            <img src="../images/cloud.png" alt="cloud_Icon">
+            <label id = "PP25" class = "dataLabels">Precipitation Probability: </label> <br> <br>
+            <img src="../images/raindrop.png" alt="rain_Icon">
+            <label id = "PI25" class = "dataLabels">Precipitation Intensity: </label> <br> <br> 
+            <img src="../images/snowflake.png" alt="snow_Icon">
+            <label id = "PT25" class = "dataLabels">Precipitation Type: </label> <br> <br> 
+            <img src="../images/wind.png" alt="wind_Icon">
+            <label id = "WS25" class = "dataLabels">Wind Speed: </label> <br> <br> 
+            <img src="../images/compas.png" alt="compass_Icon">
+            <label id = "WD25" class = "dataLabels">Wind Direction: </label> <br> <br> 
+            <img src="../images/Sun.png" alt="Sun_Icon">
+            <label id = "T25" class = "dataLabels">Temperature: </label> <br> <br> 
 </form>
 
-<br>
-<br>
-<div class = "scrollmenu">
-<form id = "weatherResultToday" class = "mainForm">
-<h2>CURRENT:</h2>
-<label id = "PI" class = "dataLabels">Precipitation Intensity: </label> <br> <br> 
-<label id = "PT" class = "dataLabels">Precipitation Type: </label> <br> <br> 
-<label id = "WS" class = "dataLabels">Wind Speed: </label> <br> <br> 
-<label id = "WG" class = "dataLabels">Wind Gust: </label> <br> <br> 
-<label id = "WD" class = "dataLabels">Wind Direction: </label> <br> <br> 
-<label id = "T" class = "dataLabels">Temperature: </label> <br> <br> 
-<label id = "TA" class = "dataLabels">Temperature Apparent: </label> <br> <br> 
-</form>
+        <form id = "weatherResultDay2" class = "dailyForm">
+            <h2 id = "label27">2 DAYS:</h2>
+            <img src="../images/cloud.png" alt="cloud_Icon">
+            <label id = "PP27" class = "dataLabels">Precipitation Probability: </label> <br> <br>
+            <img src="../images/raindrop.png" alt="rain_Icon">
+            <label id = "PI27" class = "dataLabels">Precipitation Intensity: </label> <br> <br> 
+            <img src="../images/snowflake.png" alt="snow_Icon">
+            <label id = "PT27" class = "dataLabels">Precipitation Type: </label> <br> <br> 
+            <img src="../images/wind.png" alt="wind_Icon">
+            <label id = "WS27" class = "dataLabels">Wind Speed: </label> <br> <br> 
+            <img src="../images/compas.png" alt="compass_Icon">
+            <label id = "WD27" class = "dataLabels">Wind Direction: </label> <br> <br> 
+            <img src="../images/Sun.png" alt="Sun_Icon">
+            <label id = "T27" class = "dataLabels">Temperature: </label> <br> <br> 
+        </form>
 
+        <form id = "weatherResultDay3" class = "dailyForm">
+            <h2 id = "label28">3 DAYS:</h2>
+            <img src="../images/cloud.png" alt="cloud_Icon">
+            <label id = "PP28" class = "dataLabels">Precipitation Probability: </label> <br> <br>
+            <img src="../images/raindrop.png" alt="rain_Icon">
+            <label id = "PI28" class = "dataLabels">Precipitation Intensity: </label> <br> <br> 
+            <img src="../images/snowflake.png" alt="snow_Icon">
+            <label id = "PT28" class = "dataLabels">Precipitation Type: </label> <br> <br> 
+            <img src="../images/wind.png" alt="wind_Icon">
+            <label id = "WS28" class = "dataLabels">Wind Speed: </label> <br> <br>  
+            <img src="../images/compas.png" alt="compass_Icon">
+            <label id = "WD28" class = "dataLabels">Wind Direction: </label> <br> <br> 
+            <img src="../images/Sun.png" alt="Sun_Icon">
+            <label id = "T28" class = "dataLabels">Temperature: </label> <br> <br> 
+        </form>
 
-<form id = "weatherResultHour" class = "mainForm">
-<h2 >1 HOUR:</h2>
-<label id = "PIH" class = "dataLabels">Precipitation Intensity: </label> <br> <br> 
-<label id = "PTH" class = "dataLabels">Precipitation Type: </label> <br> <br> 
-<label id = "WSH" class = "dataLabels">Wind Speed: </label> <br> <br> 
-<label id = "WGH" class = "dataLabels">Wind Gust: </label> <br> <br> 
-<label id = "WDH" class = "dataLabels">Wind Direction: </label> <br> <br> 
-<label id = "TH" class = "dataLabels">Temperature: </label> <br> <br> 
-<label id = "TAH" class = "dataLabels">Temperature Apparent: </label> <br> <br> 
-</form>
+        <form id = "weatherResultDay4" class = "dailyForm">
+            <h2 id = "label29">4 DAYS:</h2>
+            <img src="../images/cloud.png" alt="cloud_Icon">
+            <label id = "PP29" class = "dataLabels">Precipitation Probability: </label> <br> <br>
+            <img src="../images/raindrop.png" alt="rain_Icon">
+            <label id = "PI29" class = "dataLabels">Precipitation Intensity: </label> <br> <br> 
+            <img src="../images/snowflake.png" alt="snow_Icon">
+            <label id = "PT29" class = "dataLabels">Precipitation Type: </label> <br> <br>
+            <img src="../images/wind.png" alt="wind_Icon"> 
+            <label id = "WS29" class = "dataLabels">Wind Speed: </label> <br> <br>
+            <img src="../images/compas.png" alt="compass_Icon"> 
+            <label id = "WD29" class = "dataLabels">Wind Direction: </label> <br> <br> 
+            <img src="../images/Sun.png" alt="Sun_Icon">
+            <label id = "T29" class = "dataLabels">Temperature: </label> <br> <br> 
+        </form>
 
-<form id = "weatherResultDay" class = "mainForm">
-<h2 >1 DAY:</h2>
-<label id = "PID" class = "dataLabels">Precipitation Intensity: </label> <br> <br> 
-<label id = "PTD" class = "dataLabels">Precipitation Type: </label> <br> <br> 
-<label id = "WSD" class = "dataLabels">Wind Speed: </label> <br> <br> 
-<label id = "WGD" class = "dataLabels">Wind Gust: </label> <br> <br> 
-<label id = "WDD" class = "dataLabels">Wind Direction: </label> <br> <br> 
-<label id = "TD" class = "dataLabels">Temperature: </label> <br> <br> 
-<label id = "TAD" class = "dataLabels">Temperature Apparent: </label> <br> <br> 
-</form>
-</div>
+        <form id = "weatherResultDay5" class = "dailyForm">
+            <h2 id = "label30">5 DAYS:</h2>
+            <img src="../images/cloud.png" alt="cloud_Icon">
+            <label id = "PP30" class = "dataLabels">Precipitation Probability: </label> <br> <br>
+            <img src="../images/raindrop.png" alt="rain_Icon">
+            <label id = "PI30" class = "dataLabels">Precipitation Intensity: </label> <br> <br>
+            <img src="../images/snowflake.png" alt="snow_Icon"> 
+            <label id = "PT30" class = "dataLabels">Precipitation Type: </label> <br> <br> 
+            <img src="../images/wind.png" alt="wind_Icon">
+            <label id = "WS30" class = "dataLabels">Wind Speed: </label> <br> <br> 
+            <img src="../images/compas.png" alt="compass_Icon">
+            <label id = "WD30" class = "dataLabels">Wind Direction: </label> <br> <br> 
+            <img src="../images/Sun.png" alt="Sun_Icon">
+            <label id = "T30" class = "dataLabels">Temperature: </label> <br> <br> 
+        </form>
 
-<script src = "../js/bundle.js"></script>
+        <form id = "weatherResultDay6" class = "dailyForm">
+            <h2 id = "label31">6 DAYS:</h2>
+            <img src="../images/cloud.png" alt="cloud_Icon">
+            <label id = "PP31" class = "dataLabels">Precipitation Probability: </label> <br> <br>
+            <img src="../images/raindrop.png" alt="rain_Icon">
+            <label id = "PI31" class = "dataLabels">Precipitation Intensity: </label> <br> <br> 
+            <img src="../images/snowflake.png" alt="snow_Icon">
+            <label id = "PT31" class = "dataLabels">Precipitation Type: </label> <br> <br> 
+            <img src="../images/wind.png" alt="wind_Icon">
+            <label id = "WS31" class = "dataLabels">Wind Speed: </label> <br> <br> 
+            <img src="../images/compas.png" alt="compass_Icon">
+            <label id = "WD31" class = "dataLabels">Wind Direction: </label> <br> <br> 
+            <img src="../images/Sun.png" alt="Sun_Icon">
+            <label id = "T31" class = "dataLabels">Temperature: </label> <br> <br> 
+        </form>
+
+        <form id = "weatherResultDay7" class = "dailyForm">
+            <h2 id = "label32">7 DAYS:</h2>
+            <img src="../images/cloud.png" alt="cloud_Icon">
+            <label id = "PP32" class = "dataLabels">Precipitation Probability: </label> <br> <br>
+            <img src="../images/raindrop.png" alt="rain_Icon">
+            <label id = "PI32" class = "dataLabels">Precipitation Intensity: </label> <br> <br> 
+            <img src="../images/snowflake.png" alt="snow_Icon">
+            <label id = "PT32" class = "dataLabels">Precipitation Type: </label> <br> <br> 
+            <img src="../images/wind.png" alt="wind_Icon">
+            <label id = "WS32" class = "dataLabels">Wind Speed: </label> <br> <br>  
+            <img src="../images/compas.png" alt="compass_Icon">
+            <label id = "WD32" class = "dataLabels">Wind Direction: </label> <br> <br> 
+            <img src="../images/Sun.png" alt="Sun_Icon">
+            <label id = "T32" class = "dataLabels">Temperature: </label> <br> <br> 
+        </form>
+    </div>
+
+    <script src = "../js/bundle.js"></script>
 
 </body>
 </html> 
