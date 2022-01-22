@@ -8,4 +8,4 @@ be found in the documentation of those two .js files.
 
 Currently, the keys for both the Google Maps JavaScript API and Tomorrow.IO API must be added in to a file named keys.json in the root directory of the project. The file keys.json.dist shows an example of how this should be organized.
 
-This webpage is not finished and refinements are still being worked on as of the last update to GitHub.
+The user can change between a 7-day forecast and 24-hour forecast, which is done with a CSS styled checkbox and changing the forms between none and inline-block styles, which only shows up after a valid city and state combination is entered and submit is pressed. The information presented includes precipitation, temperature, and wind details.
